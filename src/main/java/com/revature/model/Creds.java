@@ -1,5 +1,10 @@
 package com.revature.model;
 
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Revature: RevForce Portal
  * Package: Model
@@ -11,7 +16,12 @@ package com.revature.model;
  * @version 1.0.0 11/02/2019
  */
 
-public class Creds {
+@XmlRootElement(name="creds")
+@XmlAccessorType(XmlAccessType.PROPERTY)
+public class Creds implements Serializable {
+	//Private Static variables
+	private static final long serialVersionUID = 1L;
+	
 	//Private variables
 	private String username;
 	private String password;

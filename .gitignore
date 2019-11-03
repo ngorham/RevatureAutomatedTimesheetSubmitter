@@ -2,6 +2,7 @@
 **/src/test/resources/**
 **/src/main/resources/**
 **/src/main/java/com/revature/creds.json
+**/src/main/java/com/revature/creds.xml
 /test-output/
 
 ### Production Directory ###

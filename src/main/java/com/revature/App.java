@@ -3,6 +3,10 @@ package com.revature;
 import java.io.File;
 import java.io.IOException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Creds;
 
@@ -29,6 +33,16 @@ public class App {
 			if(fileName.matches("^.*\\.xml$") || fileName.matches("^.*\\.XML$")) {
 				//Parse XML file
 				System.out.println("xml file: " + fileName);
+				try {
+					File xmlData = new File(fileName);
+					JAXBContext jaxbContext = JAXBContext.newInstance(Creds.class);
+					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+					creds = (Creds) jaxbUnmarshaller.unmarshal(xmlData);
+					System.out.println(creds.toString());
+				} catch(JAXBException e) {
+					e.printStackTrace();
+					System.err.println(fileName + ": Error reading form file!");
+				}
 			} else if(fileName.matches("^.*\\.json$") || fileName.matches("^.*\\.JSON$")) {
 				//Parse JSON file
 				System.out.println("json file: " + fileName);
