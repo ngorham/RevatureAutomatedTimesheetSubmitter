@@ -2,6 +2,8 @@ package com.revature.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -58,11 +60,52 @@ public class Utilities {
 			ObjectMapper mapper = new ObjectMapper();
 			File jsonData = new File(fileName);
 			creds = mapper.readValue(jsonData, Creds.class);
-			
 		} catch(IOException e) {
 			e.printStackTrace();
 			System.err.println(fileName + ": Error reading form file!");
 		}
+		return creds;
+	}
+	
+	public static Creds credsPrompt() {
+		Creds creds = null;
+		Scanner in = new Scanner(System.in);
+		String username = "";
+		String password = "";
+		double hours = 0.0;
+		boolean validUsername = false;
+		boolean validPassword = false;
+		boolean validHours = false;
+		System.out.println("Enter in user credentials");
+		while(!validUsername) {
+			System.out.print("Username: ");
+			username = in.nextLine();
+			//process input
+			if(username.matches("^.*\\..*@revature.portal$")) {
+				//valid input
+				validUsername = true;
+			} else {
+				//invalid input
+				System.out.println(username + " not valid, re-enter");
+			}
+		}
+		while(!validPassword) {
+			System.out.print("password: ");
+			password = in.nextLine();
+			validPassword = true;
+		}
+		while(!validHours) {
+			try {
+				System.out.print("hours: ");
+				hours = in.nextDouble();
+				validHours = true;
+			} catch(InputMismatchException e) {
+				System.out.println("Error - not a number, re-enter");
+				in.next();
+			}
+		}
+		in.close();
+		creds = new Creds(username, password, hours);
 		return creds;
 	}
 }

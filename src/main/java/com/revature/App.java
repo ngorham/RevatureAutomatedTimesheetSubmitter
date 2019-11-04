@@ -34,11 +34,15 @@ public class App {
 				creds = Utilities.jsonFileToCreds(fileName);
 				System.out.println(creds.toString());
 			} else { //Not xml or json formatted file
-				System.out.println("file name: " + fileName);
+				System.out.println("File format not recognized. Accepted file format: *.xml or *.json"
+						+ "\nfile name: " + fileName
+						+ "\nClosing app...");
+				System.exit(0);
 			}
+			//Pass creds into RevForcePortal object
 		} else { //prompt user for credentials
-			System.out.println("no args");
+			creds = Utilities.credsPrompt();
+			System.out.println(creds.toString());
 		}
 	}
-
 }
