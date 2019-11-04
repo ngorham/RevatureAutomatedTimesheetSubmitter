@@ -25,7 +25,7 @@ public class Creds implements Serializable {
 	//Private variables
 	private String username;
 	private String password;
-	private double hours = 0.0;
+	private double hours = 8.0;
 	
 	/**
 	 * Default Constructor
@@ -39,11 +39,10 @@ public class Creds implements Serializable {
 	 * @param password String password to be entered
 	 * @param hours double hours to be entered
 	 */
-	public Creds(String username, String password, double hours) {
+	public Creds(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.hours = hours;
 	}
 
 	/**

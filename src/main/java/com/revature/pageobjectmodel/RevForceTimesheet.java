@@ -36,8 +36,6 @@ public class RevForceTimesheet {
 	private WebElement totalHoursSpan;
 	@FindBy(xpath="//button[text()='Save']")
 	private WebElement saveButton;
-	@FindBy(xpath="//*[@id='CustomerPortalTemplate']/div[2]/div/div[2]/div/div/div/div[2]/div/div[2]/table")
-	private WebElement timesheetTable;
 	@FindBy(xpath="//*[@id=\"3:54;a\"]/div/div/a")
 	private WebElement profileNameLink;
 	@FindBy(xpath="//a[text()='Logout']")
@@ -71,6 +69,7 @@ public class RevForceTimesheet {
 		this.thuHoursBox.sendKeys(hoursStr);
 		this.friHoursBox.clear();
 		this.friHoursBox.sendKeys(hoursStr);
+		this.saveButton.click();
 		//Check if total hours is (hours * 5)
 		Double totalHours = Double.parseDouble(this.totalHoursSpan.getText());
 		if(totalHours == (hours * 5)) {
@@ -169,15 +168,6 @@ public class RevForceTimesheet {
 	 */
 	public WebElement getSaveButton() {
 		return saveButton;
-	}
-	
-	/**
-	 * Get the timesheetTable WebElement
-	 * 
-	 * @return timesheetTable WebElement timesheetTable HTML table element
-	 */
-	public WebElement getTimesheetTable() {
-		return timesheetTable;
 	}
 
 	/**

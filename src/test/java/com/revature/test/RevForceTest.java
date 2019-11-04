@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -12,9 +13,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.revature.pageobjectmodel.RevForceHome;
-import com.revature.pageobjectmodel.RevForceLogin;
-import com.revature.pageobjectmodel.RevForceTimesheet;
+import com.revature.test.pageobjectmodel.RevForceHome;
+import com.revature.test.pageobjectmodel.RevForceLogin;
+import com.revature.test.pageobjectmodel.RevForceTimesheet;
 
 /**
  * Revature: RevForce Portal
@@ -45,7 +46,7 @@ public class RevForceTest {
 		driver.quit();
 	}
 	
-	@Test(priority=1)
+	@Test(priority=1, enabled=false)
 	@Parameters({"username", "password"})
 	public void testRevForceLogin(String username, String password) {
 		//Instantiate new POM of RevForce Login page
@@ -56,6 +57,20 @@ public class RevForceTest {
 		assertNotNull(rfl.getPasswordBox());
 		assertNotNull(rfl.getLoginButton());
 		rfl.loginToRevForce(username, password);
+	}
+	
+	@Test(priority=1)
+	@Parameters({"badUsername", "badPassword"})
+	public void testRevForceLoginInvalid(String badUsername, String badPassword) {
+		//Instantiate new POM of RevForce Login page
+		RevForceLogin rfl = new RevForceLogin(driver);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		assertNotNull(rfl.getUsernameBox());
+		assertNotNull(rfl.getPasswordBox());
+		assertNotNull(rfl.getLoginButton());
+		rfl.loginToRevForce(badUsername, badPassword);
+		assertNotNull(driver.findElement(By.xpath("//div[@class='error']")));
+		
 	}
 	
 	@Test(priority=2)

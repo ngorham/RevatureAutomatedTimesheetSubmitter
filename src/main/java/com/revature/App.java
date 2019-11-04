@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.model.Creds;
+import com.revature.portal.RevForcePortal;
 import com.revature.util.Utilities;
 
 /**
@@ -27,22 +28,19 @@ public class App {
 				//Parse XML file
 				System.out.println("xml file: " + fileName);
 				creds = Utilities.xmlFileToCreds(fileName);
-				System.out.println(creds.toString());
 			} else if(fileName.matches("^.*\\.json$") || fileName.matches("^.*\\.JSON$")) {
 				//Parse JSON file
 				System.out.println("json file: " + fileName);
 				creds = Utilities.jsonFileToCreds(fileName);
-				System.out.println(creds.toString());
 			} else { //Not xml or json formatted file
 				System.out.println("File format not recognized. Accepted file format: *.xml or *.json"
 						+ "\nfile name: " + fileName
 						+ "\nClosing app...");
 				System.exit(0);
 			}
-			//Pass creds into RevForcePortal object
 		} else { //prompt user for credentials
 			creds = Utilities.credsPrompt();
-			System.out.println(creds.toString());
 		}
+		RevForcePortal rfp = new RevForcePortal(creds);
 	}
 }

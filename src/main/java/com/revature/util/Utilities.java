@@ -72,10 +72,10 @@ public class Utilities {
 		Scanner in = new Scanner(System.in);
 		String username = "";
 		String password = "";
-		double hours = 0.0;
+		//double hours = 0.0;
 		boolean validUsername = false;
 		boolean validPassword = false;
-		boolean validHours = false;
+		//boolean validHours = false;
 		System.out.println("Enter in user credentials");
 		while(!validUsername) {
 			System.out.print("Username: ");
@@ -94,7 +94,7 @@ public class Utilities {
 			password = in.nextLine();
 			validPassword = true;
 		}
-		while(!validHours) {
+		/*while(!validHours) {
 			try {
 				System.out.print("hours: ");
 				hours = in.nextDouble();
@@ -103,9 +103,9 @@ public class Utilities {
 				System.out.println("Error - not a number, re-enter");
 				in.next();
 			}
-		}
+		}*/
 		in.close();
-		creds = new Creds(username, password, hours);
+		creds = new Creds(username, password);
 		return creds;
 	}
 }
